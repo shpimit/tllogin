@@ -1,0 +1,69 @@
+# ==================================================================
+# Data Source
+# ==================================================================
+spring:
+  datasource:
+#    url: jdbc:log4jdbc:h2:tcp://localhost/~/test
+#    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+#    username: sa
+
+# ==================================================================
+# mariadb database
+# ==================================================================
+    url: jdbc:log4jdbc:mariadb://localhost:3306/mio
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    username: root
+    password: prugio01
+
+# ==================================================================
+# h2 database
+# ==================================================================
+#  h2:
+#    console:
+#      enabled: true
+#      settings:
+#        web-allow-others: true
+# ==================================================================
+# redis database
+# ==================================================================
+  redis:
+    host: localhost
+    port: 6379
+
+
+
+# ==================================================================
+# Data Source : keep the connection alive if idle for a long time (needed in production)
+# ==================================================================
+tomcat:
+  test-while-idle: true
+  validation-query: SELECT 1
+
+# ==============================================================
+# = Initialize the database using data.sql script
+# ==============================================================
+initialization-mode: always
+
+# ==================================================================
+# thymeleaf
+# ==================================================================
+thymeleaf:
+  cache: false
+
+mybatis:
+  type-aliases-package: mio
+  config-location: classpath:sql-mapper-config.xml
+  mapper-locations: classpath:/sqlmap/**/*Mapper_SQL.xml
+
+logging:
+  level:
+    root: INFO
+    jdbc: OFF
+    jdbc.connection: OFF
+    jdbc.sqlonly: DEBUG
+    jdbc.sqltiming: DEBUG
+    jdbc.audit : OFF
+    jdbc.resultset : OFF
+    jdbc.resultsettable: DEBUG
+    org.springframework.web: DEBUG
+    com.zaxxer.hikari.HikariDataSource: ERROR

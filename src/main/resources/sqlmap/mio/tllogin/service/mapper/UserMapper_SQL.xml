@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mio.tllogin.service.mapper.UserMapper">
+    <select id="selectList" resultType="mio.tllogin.service.impl.UserDetailsImpl">
+/*  */
+        SELECT
+            *
+        FROM USER
+    </select>
+
+    <select id="findByUsername" parameterType="String" resultType="mio.tllogin.service.impl.UserDetailsImpl">
+        SELECT
+        *
+        FROM USER
+        WHERE
+        <choose>
+            <when test="username != null">USERNAME = #{username} </when>
+            <when test="username == null">USERNAME = 'XXXXXXXXXX'</when>
+        </choose>
+    </select>
+
+    <delete id="deleteUser" parameterType="String">
+        DELETE FROM USER
+        <choose>
+            <when test="username != null">WHERE USERNAME = #{username} </when>
+            <when test="username == null">WHERE USERNAME = 'XXXXXXXXXX'</when>
+        </choose>
+    </delete>
+
+    <insert id="insertUser" parameterType="mio.tllogin.service.impl.UserDetailsImpl">
+        INSERT INTO USER (
+                          id
+                         ,username
+                         ,password
+                         ,active
+                         ,roles
+                         ,permissions
+                         ,user_type
+                         ,createdate
+                         ,confirmpassword
+                         ,email
+        ) VALUES (
+                     #{id}
+                 ,#{username}
+                 ,#{password}
+                 ,#{active}
+                 ,#{roles}
+                 ,#{permissions}
+                 ,#{userType}
+                 ,#{createdate}
+                 ,#{confirmpassword}
+                 ,#{email}
+                 )
+    </insert>
+
+    <insert id="insertAllUser" parameterType="java.util.Map">
+        INSERT INTO USER (
+        id
+        ,username
+        ,password
+        ,active
+        ,roles
+        ,permissions
+        ,user_type
+        ,createdate
+        ,confirmpassword
+        ,email
+        ) VALUES
+        <foreach collection="users" item="userList" separator=" , ">
+            (
+            #{userList.id}
+            ,#{userList.username}
+            ,#{userList.password}
+            ,#{userList.active}
+            ,#{userList.roles}
+            ,#{userList.permissions}
+            ,#{userList.userType}
+            ,#{userList.createdate}
+            ,#{userList.confirmpassword}
+            ,#{userList.email}
+            )
+        </foreach>
+    </insert>
+
+
+</mapper>

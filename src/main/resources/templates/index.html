@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+  <div th:replace="/fragments/header.html :: fragment-header"></div>
+</head>
+<body>
+
+  <!-- 페이지 소스 -->
+  <div class="container-fluid p-5 mt-5">
+    <div class="text-light text-center my-5">
+      <h1 class="display-4 mb-4 text-uppercase">Welcome, <span th:text="${username}" class="text-success">Leo</span></h1>
+      <form th:action="@{/logout}" method="get">
+        <button class="btn btn-lg btn-info" name="registration" type="Submit">Logout</button>
+      </form>
+    </div>
+
+    <div class="row mx-5">
+      <div class="col-md-4">
+        <div class="card">
+          <i class="fas fa-users-cog fa-7x mx-auto my-5 text-danger"></i>
+          <div class="card-body text-center">
+            <h3 class="card-title text-danger mb-4">Administrator</h3>
+            <form action="/admin.html" th:action="@{/home/admin}" method="get">
+              <button class="btn btn-md btn-block btn-danger">Go</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <i class="fas fa-user-friends fa-7x mx-auto my-5 text-success"></i>
+          <div class="card-body text-center">
+            <h3 class="card-title text-success mb-4">User</h3>
+            <form action="/user.html" th:action="@{/home/user}" method="get">
+              <button class="btn btn-md btn-block btn-success">Go</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <i class="fas fa-user-secret fa-7x mx-auto my-5 text-warning"></i>
+          <div class="card-body text-center">
+            <h3 class="card-title text-warning mb-4">Guest</h3>
+            <form action="/guest.html" th:action="@{/home/guest}" method="get">
+              <button class="btn btn-md btn-block btn-warning">Go</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 페이지 소스 -->
+
+  <footer th:replace="/fragments/footer.html :: fragment-footer"></footer>
+</body>
+</html>

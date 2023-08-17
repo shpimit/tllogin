@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:replace="/fragments/header.html :: fragment-header"></div>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="pt-5 mt-5 text-center">
+            <i class="fas fa-user-secret fa-7x my-5 text-warning"></i>
+            <form action="/home.html" th:action="@{/home}">
+                <button class="btn btn-lg btn-info mb-5">Home</button>
+            </form>
+            <h4 class="text-light">Content Available Only <span class="text-warning">Guest</span> Role</h4>
+        </div>
+    </div>
+</body>
+</html>
